@@ -297,7 +297,7 @@ def test__parse_params_func_None():
 
     assert mod._prefix == ''
     assert mod.func is None
-    assert mod._func_allargs == []
+    assert mod._func_allargs == set()
     assert mod._func_haskeywords is False
     assert mod.independent_vars == []
 
@@ -322,7 +322,7 @@ def test__parse_params_inspect_signature():
         pass
 
     mod = Model(func_keyword)
-    assert mod._func_allargs == ['a', 'b']
+    assert mod._func_allargs == {'a', 'b'}
     assert mod._func_haskeywords is True
     assert mod.independent_vars == ['a']
     assert mod.def_vals == {}
@@ -332,7 +332,7 @@ def test__parse_params_inspect_signature():
         pass
 
     mod = Model(func_keyword_only)
-    assert mod._func_allargs == []
+    assert mod._func_allargs == set()
     assert mod._func_haskeywords is True
     assert mod.independent_vars == []
     assert mod._param_root_names is None
@@ -342,7 +342,7 @@ def test__parse_params_inspect_signature():
         pass
 
     mod = Model(func_default_value)
-    assert mod._func_allargs == ['a', 'b', 'c']
+    assert mod._func_allargs == {'a', 'b', 'c'}
     assert mod._func_haskeywords is False
     assert mod.independent_vars == ['a']
 
